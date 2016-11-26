@@ -27,10 +27,14 @@ CREATE TABLE `test` (
   `test_name` varchar(15) DEFAULT NULL,
   `test_age` int(3) DEFAULT NULL,
   `test_phone` int(11) DEFAULT NULL,
+  `test_sex` varchar(6) DEFAULT NULL,
   PRIMARY KEY (`test_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 /*Data for the table `test` */
+
+insert  into `test`(`test_id`,`test_name`,`test_age`,`test_phone`,`test_sex`) values (1,'向吊',12,123345678,'男');
+
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

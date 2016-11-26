@@ -1,0 +1,14 @@
+.submitBtn {
+	margin: 0 10px;
+	background: #4caf50;
+	color: #fff;
+}
+.submitBtn:hover {
+	margin-left: 10px;
+	background: #15ca1c;
+	color: #fff;
+}
+.adduser label, .addUser input {
+	margin-top: 10px;
+	display: inline-block;
+}

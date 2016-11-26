@@ -60,5 +60,6 @@ spl_autoload_register('Autoload::loading');
 
 
 // 数据设置
-$connect = new PdoMysql($config);
-$pdo = $connect->connect();
+$pdo = new PdoMysql($config);
+$conn = $pdo->connect();
+// $pdo->select('select* from test');
