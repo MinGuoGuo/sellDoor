@@ -1,0 +1,32 @@
+.Header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+}
+.Nav {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    bottom: 20px;
+    background: #F5F5F5;
+    overflow-x: hidden;
+    z-index: 2;
+}
+.Content {
+    position: absolute;
+    top: 90px;
+    left: 210px;
+    min-height: 400px;
+    min-width: 1000px;
+    bottom: 10px;
+    border: 1px #ccc solid;
+    padding: 20px 15px;
+}
+.Footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
