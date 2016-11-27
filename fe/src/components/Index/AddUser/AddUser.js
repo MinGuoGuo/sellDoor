@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Input, Button, Select, Icon } from 'antd';
+import { default as swal } from 'sweetalert2'
 import './AddUser.css';
 import 'whatwg-fetch';
 
@@ -12,7 +13,8 @@ export default class AddUser extends Component {
             name: '',
             age: '',
             tel: '',
-            sex: ''
+            sex: '',
+            loading: false
         };
     }
     handleClick = () => {
@@ -47,18 +49,32 @@ export default class AddUser extends Component {
 
     }
     submitClick = () => {
+        this.setState({
+            loading: true
+        });
         fetch('http://127.0.0.1/sellDoor/php/add.php', {
             method: 'POST',
-            headers: {
+            headers: {   
                 'Content-Type': 'text/plain'
             },
             body: JSON.stringify(this.state)
-        }).then(function(response) {
+        }).then((response) => {
             return response.json();
-        }).then(function(result) {
-            console.log(result)
-        }).catch(function(error) {
-            console.log('request failed', error)
+        }).then((result) => {
+            console.log(result.msg);
+            if (result.msg == '添加成功') {
+                alert('提交成功');
+                window.history.go(-1);
+            } else {
+                this.setState({
+                    loading: false
+                })
+            }
+        }).catch((error) => {
+            console.log('提交失败');
+            this.setState({
+                loading: false
+            })
         })
     }
     render () {
@@ -78,7 +94,7 @@ export default class AddUser extends Component {
                     <Input style={{ width: 200 }} onChange={this.getValue} data-type='tel' maxLength="11" placeholder="电话" />
                 </div>
                 <div style={{ textAlign: 'center' }}>
-                    <Button className="submitBtn" onClick={this.submitClick}>提交</Button>
+                    <Button className="submitBtn" loading={this.state.loading} onClick={this.submitClick}>提交</Button>
                     <Button type="primary" onClick={this.handleClick}>返回</Button>
                 </div>
             </div>

@@ -17,7 +17,6 @@ export default class Index extends Component {
             data: null
         }
     }
-
     componentDidMount = () => {
         fetch('http://127.0.0.1/sellDoor/php/list.php')
             .then( (response) => {
@@ -77,7 +76,7 @@ export default class Index extends Component {
             key: 'action',
             render: (text, record) => (
                 <span>
-                    <Link to={{pathname: "modifyUser/" + record.test_id +"/" + record.test_name, query: {name: record.test_name, age: record.test_age}}}>修改</Link>
+                    <span href="javascript:;"><Link to={{pathname: "modifyUser/" + record.id +"/" + record.name, query: {name: record.name, age: record.age}}}>修改</Link></span>
                     <span className="ant-divider" />
                     <a href="javascript:;" onClick={() => {this.delClick(record.test_id)}}>删除</a>
                 </span>
