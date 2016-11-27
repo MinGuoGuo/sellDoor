@@ -76,7 +76,11 @@ export default class AddUser extends Component {
             } else {
                 this.setState({
                     loading: false
-                })
+                });
+                Modal.warning({
+                    title: '服务器繁忙',
+                    content: result.msg
+                });
             }
         }).catch((error) => {
             console.log('提交失败');
