@@ -44,16 +44,6 @@ $mysmtp_account     = 'iss';
 $mysmtp_pass        = 'wuzhouzhihui12345678';
 $mysmtp_mailfrom    = 'iss@uibe.edu.cn';
 
-//Cookie 和 Session===================================
-$cookie_ADMINID      = PROJECTCODE.'ACID';
-$cookie_ADMINCODE    = PROJECTCODE.'ACCODE';
-$session_ADMINID     = PROJECTCODE.'ASID';
-
-$cookie_USERID      = PROJECTCODE.'UCID';
-$cookie_USERODE     = PROJECTCODE.'UCCODE';
-$session_USERID     = PROJECTCODE.'USID';
-
-
 // 初始化
 require_once(COMMON_PATH.'autoload.class.php');
 spl_autoload_register('Autoload::loading');

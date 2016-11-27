@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import { Input, Button, Select, Icon } from 'antd';
+import { Input, Button, Select, Icon, Modal } from 'antd';
+import { History } from 'react-router';
+
 // import { default as swal } from 'sweetalert2';
 import './AddUser.css';
 import 'whatwg-fetch';
 
 const Option = Select.Option;
+const confirm = Modal.confirm;
 
 export default class AddUser extends Component {
     constructor (props) {
@@ -14,7 +17,8 @@ export default class AddUser extends Component {
             age: '',
             tel: '',
             sex: '',
-            loading: false
+            loading: false,
+            alert: false
         };
     }
     handleClick = () => {
@@ -48,6 +52,7 @@ export default class AddUser extends Component {
         }
 
     }
+    
     submitClick = () => {
         this.setState({
             loading: true
@@ -61,10 +66,13 @@ export default class AddUser extends Component {
         }).then((response) => {
             return response.json();
         }).then((result) => {
-            console.log(result.msg);
-            if (result.msg == '添加成功') {
-                alert('提交成功');
-                window.history.go(-1);
+            if (result.code == 1) {
+                Modal.success({
+                    title: result.msg,
+                    onOk() {
+                        window.history.back();
+                    }
+                });
             } else {
                 this.setState({
                     loading: false

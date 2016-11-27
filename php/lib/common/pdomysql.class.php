@@ -17,6 +17,7 @@ class PdoMysql  {
     protected $attrCase = PDO::CASE_LOWER;
     // 查询对象
     protected $query = [];
+    protected $links = [];
     // 数据库连接参数配置
     protected $config = [
         'type'           => '',// 数据库类型
