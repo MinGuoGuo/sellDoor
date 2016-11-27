@@ -19,21 +19,6 @@ export default class Index extends Component {
     }
     componentDidMount = () => {
         console.log(1);
-       /* $.ajax({
-            url: '/src/mock/list.json',
-            contentType: 'application/json',
-            dataType: 'json',
-            success: (result) => {
-                //console.log(result.result);
-                this.setState({
-                    data: result.result
-                })
-
-            },
-            error: function () {
-                alert('请求失败！')
-            }
-        });*/
         fetch('/src/mock/list.json')
             .then((response) => {
                 console.log(response);
@@ -79,7 +64,7 @@ export default class Index extends Component {
             key: 'action',
             render: (text, record) => (
                 <span>
-                    <a href="javascript:;"><Link to={{pathname: "modifyUser/" + record.id +"/" + record.name, query: {name: record.name, age: record.age}}}>修改</Link></a>
+                    <span href="javascript:;"><Link to={{pathname: "modifyUser/" + record.id +"/" + record.name, query: {name: record.name, age: record.age}}}>修改</Link></span>
                     <span className="ant-divider" />
                     <a href="javascript:;" onClick={() => {this.delClick(record.id)}}>删除</a>
                 </span>
