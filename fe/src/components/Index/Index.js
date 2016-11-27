@@ -45,9 +45,6 @@ export default class Index extends Component {
                 message: result.msg,
                 description: '删除',
                 icon: <Icon type="smile-o" style={{ color: '#2db7f5' }} />,
-                onClose: () => {
-                    location.reload()
-                }
             });
         }).catch((error) => {
             
