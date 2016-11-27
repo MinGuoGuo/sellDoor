@@ -54,9 +54,9 @@ export default class AddUser extends Component {
             },
             body: JSON.stringify(this.state)
         }).then(function(response) {
-            console.log(response.json());
-        }).then(function(data) {
-            console.log('request succeeded with JSON response', data)
+            return response.json();
+        }).then(function(result) {
+            console.log(result)
         }).catch(function(error) {
             console.log('request failed', error)
         })

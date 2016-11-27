@@ -1,4 +1,3 @@
-/*jshint esversion: 6 */
 import React, { Component } from 'react';
 import { Input, Form, Button, Table, Icon, notification } from 'antd';
 import { Link } from 'react-router';
