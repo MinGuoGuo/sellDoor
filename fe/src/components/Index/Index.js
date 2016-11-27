@@ -10,8 +10,6 @@ notification.config({
     duration: 5,
 });
 
-
-let dataId = '';
 export default class Index extends Component {
     constructor (props) {
         super(props);
@@ -27,7 +25,7 @@ export default class Index extends Component {
     //     this.getList();
     // }
     componentDidUpdate = () => {
-        this.getList();
+        //this.getList();
     }
     getList = () => {
         fetch('http://127.0.0.1/sellDoor/php/list.php')
@@ -47,11 +45,11 @@ export default class Index extends Component {
             });
         })
     }
-    delClick = () => {
+    delClick = (id) => {
         fetch('http://127.0.0.1/sellDoor/php/del.php', {
             method: 'POST',
             headers: { 'Content-Type': 'text/plain' },
-            body: JSON.stringify({id: dataId})
+            body: JSON.stringify({id: id})
         }).then( (response) => {
             return response.json()
         }).then((result)=>  {
@@ -65,10 +63,8 @@ export default class Index extends Component {
         })
          this.setState({ modal2Visible: false });
     }
-    setModal2Visible = (id) => {
+    setModal2Visible = () => {
         this.setState({ modal2Visible: true });
-        dataId = id;
-        console.log(dataId);
     }
     cancelClick = () => {
         this.setState({ modal2Visible: false });
@@ -98,8 +94,22 @@ export default class Index extends Component {
                 <span>
                     <span href="javascript:;"><Link to={{pathname: "modifyUser/" + record.id +"/" + record.name, query: {name: record.name, age: record.age}}}>修改</Link></span>
                     <span className="ant-divider" />
-                    <a href="javascript:;" onClick={() => this.setModal2Visible(record.test_id)}>删除</a>
+                    <a href="javascript:;" onClick={() => this.setModal2Visible()}>删除</a>
+                    <Modal
+                        width='300'
+                        title="提示信息！"
+                        wrapClassName="vertical-center-modal"
+                        visible={this.state.modal2Visible}
+                        onOk={ () => this.delClick(record.test_id)}
+                        onCancel={this.cancelClick}
+                    >
+                        <div>
+                            <Icon type="smile-o" />
+                            是否删除本条数据？
+                        </div>
+                    </Modal>
                 </span>
+                
             )
         }];
         return (
@@ -110,19 +120,6 @@ export default class Index extends Component {
                     <Button type="primary" size="large">搜索</Button>
                     <div style={{marginTop: 20}}>
                         <Button type="primary" size="large"><Link to="/addUser">新建</Link></Button>
-                        <Modal
-                            width='300'
-                            title="提示信息！"
-                            wrapClassName="vertical-center-modal"
-                            visible={this.state.modal2Visible}
-                            onOk={this.delClick}
-                            onCancel={this.cancelClick}
-                        >
-                            <div>
-                                <Icon type="smile-o" />
-                                是否删除本条数据？
-                            </div>
-                        </Modal>
                     </div>
                 </div>
                 <div className="table">
