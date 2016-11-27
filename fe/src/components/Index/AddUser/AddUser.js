@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Input, Button, Select, Icon } from 'antd';
-import { default as swal } from 'sweetalert2'
+// import { default as swal } from 'sweetalert2';
 import './AddUser.css';
 import 'whatwg-fetch';
 
