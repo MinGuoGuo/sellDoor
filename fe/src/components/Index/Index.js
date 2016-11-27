@@ -14,34 +14,17 @@ export default class Index extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            data: null,
+            data: null
         }
     }
-    componentDidMount = () => {
-        console.log(1);
-       /* $.ajax({
-            url: '/src/mock/list.json',
-            contentType: 'application/json',
-            dataType: 'json',
-            success: (result) => {
-                //console.log(result.result);
-                this.setState({
-                    data: result.result
-                })
 
-            },
-            error: function () {
-                alert('请求失败！')
-            }
-        });*/
-        fetch('/src/mock/list.json')
-            .then((response) => {
-                console.log(response);
+    componentDidMount = () => {
+        fetch('http://127.0.0.1/sellDoor/php/list.php')
+            .then( (response) => {
                 return response.json()
             }).then((result)=>  {
-                console.log(result);
                 this.setState({
-                    data: result.result
+                    data: result
                 })
         }).catch((error) => {
             notification.open({
@@ -50,38 +33,53 @@ export default class Index extends Component {
                 icon: <Icon type="frown-o" style={{ color: '#2db7f5' }} />
             });
         })
-
     }
-    delClick = (x) => {
-        //alert(1);
-        console.log(x);
+    delClick = (recordId) => {
+        fetch('http://127.0.0.1/sellDoor/php/del.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain' },
+            body: JSON.stringify({id: recordId})
+        }).then( (response) => {
+            return response.json()
+        }).then((result)=>  {
+            notification.open({
+                message: result.msg,
+                description: '删除',
+                icon: <Icon type="smile-o" style={{ color: '#2db7f5' }} />,
+                onClose: () => {
+                    location.reload()
+                }
+            });
+        }).catch((error) => {
+            
+        })
     }
     render () {
         const columns = [{
             title: '姓名',
-            dataIndex: 'name',
+            dataIndex: 'test_name',
             key: 'name',
-            //render: text => <a href="#">{text}</a>
+            render: text => <a href="#">{text}</a>
         }, {
             title: '年龄',
-            dataIndex: 'age',
+            dataIndex: 'test_age',
             key: 'age'
         }, {
             title: '性别',
-            dataIndex: 'sex',
+            dataIndex: 'test_sex',
             key: 'sex'
         }, {
             title: '电话',
-            dataIndex: 'tel',
+            dataIndex: 'test_phone',
             key: 'tel'
         },{
             title: '操作',
             key: 'action',
             render: (text, record) => (
                 <span>
-                    <a href="javascript:;"><Link to={{pathname: "modifyUser/" + record.id +"/" + record.name, query: {name: record.name, age: record.age}}}>修改</Link></a>
+                    <Link to={{pathname: "modifyUser/" + record.test_id +"/" + record.test_name, query: {name: record.test_name, age: record.test_age}}}>修改</Link>
                     <span className="ant-divider" />
-                    <a href="javascript:;" onClick={() => {this.delClick(record.id)}}>删除</a>
+                    <a href="javascript:;" onClick={() => {this.delClick(record.test_id)}}>删除</a>
                 </span>
             )
         }];
@@ -96,7 +94,7 @@ export default class Index extends Component {
                     </div>
                 </div>
                 <div className="table">
-                    <Table columns={columns} dataSource={this.state.data} rowKey={record => record.id} />
+                    <Table columns={columns} dataSource={this.state.data} rowKey={record => record.test_id} />
                 </div>
             </div>
         )
