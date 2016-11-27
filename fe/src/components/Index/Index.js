@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, Form, Button, Table, Icon, notification } from 'antd';
+import { Input, Form, Button, Table, Icon, notification, Modal } from 'antd';
 import { Link } from 'react-router';
 import 'whatwg-fetch';
 import './Index.css';
@@ -10,11 +10,14 @@ notification.config({
     duration: 5,
 });
 
+
+let dataId = '';
 export default class Index extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            data: null
+            data: null,
+            modal2Visible: false
         }
     }
     componentDidMount = () => {
@@ -29,8 +32,10 @@ export default class Index extends Component {
     getList = () => {
         fetch('http://127.0.0.1/sellDoor/php/list.php')
             .then( (response) => {
+                console.log(response)
                 return response.json()
             }).then((result)=>  {
+                 console.log(result);
                 this.setState({
                     data: result
                 })
@@ -42,11 +47,11 @@ export default class Index extends Component {
             });
         })
     }
-    delClick = (recordId) => {
+    delClick = () => {
         fetch('http://127.0.0.1/sellDoor/php/del.php', {
             method: 'POST',
             headers: { 'Content-Type': 'text/plain' },
-            body: JSON.stringify({id: recordId})
+            body: JSON.stringify({id: dataId})
         }).then( (response) => {
             return response.json()
         }).then((result)=>  {
@@ -58,6 +63,15 @@ export default class Index extends Component {
         }).catch((error) => {
             
         })
+         this.setState({ modal2Visible: false });
+    }
+    setModal2Visible = (id) => {
+        this.setState({ modal2Visible: true });
+        dataId = id;
+        console.log(dataId);
+    }
+    cancelClick = () => {
+        this.setState({ modal2Visible: false });
     }
     render () {
         const columns = [{
@@ -84,7 +98,7 @@ export default class Index extends Component {
                 <span>
                     <span href="javascript:;"><Link to={{pathname: "modifyUser/" + record.id +"/" + record.name, query: {name: record.name, age: record.age}}}>修改</Link></span>
                     <span className="ant-divider" />
-                    <a href="javascript:;" onClick={() => {this.delClick(record.test_id)}}>删除</a>
+                    <a href="javascript:;" onClick={() => this.setModal2Visible(record.test_id)}>删除</a>
                 </span>
             )
         }];
@@ -96,10 +110,23 @@ export default class Index extends Component {
                     <Button type="primary" size="large">搜索</Button>
                     <div style={{marginTop: 20}}>
                         <Button type="primary" size="large"><Link to="/addUser">新建</Link></Button>
+                        <Modal
+                            width='300'
+                            title="提示信息！"
+                            wrapClassName="vertical-center-modal"
+                            visible={this.state.modal2Visible}
+                            onOk={this.delClick}
+                            onCancel={this.cancelClick}
+                        >
+                            <div>
+                                <Icon type="smile-o" />
+                                是否删除本条数据？
+                            </div>
+                        </Modal>
                     </div>
                 </div>
                 <div className="table">
-                    <Table columns={columns} dataSource={this.state.data} rowKey={record => record.test_id} />
+                    <Table columns={columns} dataSource={this.state.data} />
                 </div>
             </div>
         )
