@@ -18,6 +18,15 @@ export default class Index extends Component {
         }
     }
     componentDidMount = () => {
+        this.getList();
+    }
+    // componentWillUpdate = () => {
+    //     this.getList();
+    // }
+    componentDidUpdate = () => {
+        this.getList();
+    }
+    getList = () => {
         fetch('http://127.0.0.1/sellDoor/php/list.php')
             .then( (response) => {
                 return response.json()
@@ -44,10 +53,7 @@ export default class Index extends Component {
             notification.open({
                 message: result.msg,
                 description: '删除',
-                icon: <Icon type="smile-o" style={{ color: '#2db7f5' }} />,
-                onClose: () => {
-                    location.reload()
-                }
+                icon: <Icon type="smile-o" style={{ color: '#2db7f5' }} />
             });
         }).catch((error) => {
             
