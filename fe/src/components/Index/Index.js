@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, Form, Button, Table, Icon, notification, Modal } from 'antd';
+import { Input, Form, Button, Table, Icon, notification, Modal, Pagination } from 'antd';
 import { Link } from 'react-router';
 import 'whatwg-fetch';
 import './Index.css';
@@ -15,7 +15,9 @@ export default class Index extends Component {
         super(props);
         this.state = {
             data: null,
-            modal2Visible: false
+            modal2Visible: false,
+            pageNo: 1,
+            totalPage: 20
         }
     }
     componentDidMount = () => {
@@ -29,14 +31,19 @@ export default class Index extends Component {
     //     this.getList();
     // }
     getList = () => {
-        fetch('http://127.0.0.1/sellDoor/php/list.php')
-            .then( (response) => {
+        fetch('http://127.0.0.1/sellDoor/php/list.php', {
+            method: 'POST',
+            headers: {'Content-Type': 'text/plain'},
+            body: JSON.stringify({page: this.state.pageNo, pagesize: 1})
+        }).then( (response) => {
                 console.log(response)
                 return response.json()
             }).then((result)=>  {
                 console.log(result);
+                console.log(typeof result.totalpage);
                 this.setState({
-                    data: result
+                    data: result.list,
+                    totalPage: result.totalpage
                 })
         }).catch((error) => {
             notification.open({
@@ -75,6 +82,15 @@ export default class Index extends Component {
     cancelClick = () => {
         this.setState({ modal2Visible: false });
     }
+    pageChange = (page) => {
+        console.log(page);
+        this.setState({ pageNo: page });
+        console.log(this.state.pageNo);
+        setTimeout(() => {
+            this.getList();
+        }, 50)
+        
+    } 
     render () {
         const columns = [{
             title: '姓名',
@@ -98,7 +114,7 @@ export default class Index extends Component {
             key: 'action',
             render: (text, record) => (
                 <span>
-                    <span href="javascript:;"><Link to={{pathname: "modifyUser/" + record.id +"/" + record.name, query: {name: record.name, age: record.age}}}>修改</Link></span>
+                    <span href="javascript:;"><Link to={{pathname: "modifyUser/" + record.id +"/" + record.name}}>修改</Link></span>
                     <span className="ant-divider" />
                     <a href="javascript:;" onClick={() => this.setModal2Visible()}>删除</a>
                     <Modal
@@ -130,6 +146,7 @@ export default class Index extends Component {
                 <div className="table">
                     <Table columns={columns} dataSource={this.state.data} />
                 </div>
+                <Pagination showQuickJumper defaultCurrent={this.state.pageNo} total={this.state.totalPage} defaultPageSize={1} onChange={this.pageChange} />
             </div>
         )
     }

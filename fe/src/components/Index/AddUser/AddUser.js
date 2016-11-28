@@ -102,7 +102,7 @@ export default class AddUser extends Component {
                     <label>年龄：</label>
                     <Input style={{ width: 200 }} onChange={this.getValue} data-type='age' maxLength="2" placeholder="年龄" />
                     <label>性别：</label>
-                    <Select showSearch default='' style={{ width: 200 }} placeholder="搜索..." optionFilterProp="children" onChange={ this.showValue } notFoundContent="">
+                    <Select showSearch default='' style={{ width: 200 }} placeholder="性别" optionFilterProp="children" onChange={ this.showValue } notFoundContent="">
                         <Option value="男">男</Option>
                         <Option value="女">女</Option>
                     </Select>
