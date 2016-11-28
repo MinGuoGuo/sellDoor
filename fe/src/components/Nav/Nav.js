@@ -16,7 +16,7 @@ export default class Sider extends Component {
         }
     }
     handleClick = (e) => {
-        console.log(this.props.selected);
+        console.log(this.state);
         this.setState({ current: e.key });
     }
     onOpenChange =(openKeys) => {

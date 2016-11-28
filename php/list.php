@@ -2,11 +2,11 @@
 header('Access-Control-Allow-Origin: *');
 
 require_once('config.inc.php');
-
+$postdata = json_decode($HTTP_RAW_POST_DATA)
 // 页码
-$page = $_POST['page'];
+$page = $postdata->page;
 // 每页条数
-$pagesize = $_POST['pagesize'];
+$pagesize = $postdata->pagesize;
 $startrow = ($page - 1)*$pagesize;
 // 查询条件
 $where = '1=1';
