@@ -6,6 +6,7 @@ import Index from './components/Index/Index';
 import AddUser from './components/Index/AddUser/AddUser';
 import ModifyUser from './components/Index/ModifyUser/ModifyUser';
 import Second from './components/Second/Second';
+import Third from './components/Third/Third';
 
 /*
 * 以下方法是直接将组件渲染出来；下面我们看看如何用路由的形式将组件渲染出来
@@ -25,6 +26,7 @@ render((
             <Route path="/addUser" component={AddUser} />
             <Route path="/modifyUser/:id/:name" component={ModifyUser} />
             <Route path="/second" component={Second} />
+            <Route path="/third" component={Third} />
         </Route>
     </Router>
 ), document.getElementById('root'));

@@ -17,8 +17,7 @@ export default class AddUser extends Component {
             age: '',
             tel: '',
             sex: '',
-            loading: false,
-            alert: false
+            loading: false
         };
     }
     handleClick = () => {
@@ -52,8 +51,8 @@ export default class AddUser extends Component {
         }
 
     }
-    
     submitClick = () => {
+        const _this = this;
         this.setState({
             loading: true
         });
@@ -84,9 +83,14 @@ export default class AddUser extends Component {
             }
         }).catch((error) => {
             console.log('提交失败');
-            this.setState({
-                loading: false
-            })
+            Modal.error({
+                title: '提示信息',
+                content: '提交失败！',
+                onOk() {
+                    _this.setState({ loading: false });
+                }
+            });
+            
         })
     }
     render () {

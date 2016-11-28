@@ -21,19 +21,20 @@ export default class Index extends Component {
     componentDidMount = () => {
         this.getList();
     }
+    //以下两个生命周期不要随便用
     // componentWillUpdate = () => {
     //     this.getList();
     // }
-    componentDidUpdate = () => {
-        //this.getList();
-    }
+    // componentDidUpdate = () => {
+    //     this.getList();
+    // }
     getList = () => {
         fetch('http://127.0.0.1/sellDoor/php/list.php')
             .then( (response) => {
                 console.log(response)
                 return response.json()
             }).then((result)=>  {
-                 console.log(result);
+                console.log(result);
                 this.setState({
                     data: result
                 })
@@ -59,9 +60,14 @@ export default class Index extends Component {
                 icon: <Icon type="smile-o" style={{ color: '#2db7f5' }} />
             });
         }).catch((error) => {
-            
-        })
-         this.setState({ modal2Visible: false });
+             notification.open({
+                message: '提示信息',
+                description: '删除失败!',
+                icon: <Icon type="frown-o" style={{ color: '#2db7f5' }} />
+            });
+        });
+        this.getList();
+        this.setState({ modal2Visible: false });
     }
     setModal2Visible = () => {
         this.setState({ modal2Visible: true });

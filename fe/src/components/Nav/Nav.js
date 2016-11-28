@@ -54,7 +54,7 @@ export default class Sider extends Component {
                     <SubMenu key="sub1" title={<span><Icon type="mail" /><span>Navigation One</span></span>}>
                         <Menu.Item key="1"><Link to="/index">Option 1</Link></Menu.Item>
                         <Menu.Item key="2"><Link to="/second">Option 2</Link></Menu.Item>
-                        <Menu.Item key="3"><Link>Option 3</Link></Menu.Item>
+                        <Menu.Item key="3"><Link to="/third">Option 3</Link></Menu.Item>
                     </SubMenu>
                     <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>Navigation Two</span></span>}>
                         <Menu.Item key="5">Option 5</Menu.Item>
