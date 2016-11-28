@@ -115,7 +115,6 @@ export default class Index extends Component {
                         </div>
                     </Modal>
                 </span>
-                
             )
         }];
         return (
