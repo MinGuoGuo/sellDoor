@@ -4,11 +4,9 @@ header('Access-Control-Allow-Origin: *');
 require_once('config.inc.php');
 
 // 页码
-// $page = $_POST['page'];
-$page = 1;
+$page = $_POST['page'];
 // 每页条数
-// $pagesize = $_POST['pagesize'];
-$pagesize = 2;
+$pagesize = $_POST['pagesize'];
 $startrow = ($page - 1)*$pagesize;
 // 查询条件
 $where = '1=1';
