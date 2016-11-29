@@ -10,6 +10,7 @@ notification.config({
     duration: 5,
 });
 
+let dataId = '';
 export default class Index extends Component {
     constructor (props) {
         super(props);
@@ -38,11 +39,8 @@ export default class Index extends Component {
             headers: {'Content-Type': 'text/plain'},
             body: JSON.stringify({page: this.state.pageNo, pagesize: 5})
         }).then( (response) => {
-                console.log(response)
                 return response.json()
             }).then((result)=>  {
-                console.log(result);
-                console.log(result.totalpage);
                 this.setState({
                     data: result.list,
                     count: result.count,
@@ -56,12 +54,12 @@ export default class Index extends Component {
             });
         })
     }
-    delClick = (id) => {
-        console.log(id);
-        /*fetch('http://127.0.0.1/sellDoor/php/del.php', {
+    delClick = () => {
+        console.log(dataId);
+        fetch('http://127.0.0.1/sellDoor/php/del.php', {
             method: 'POST',
             headers: { 'Content-Type': 'text/plain' },
-            body: JSON.stringify({id: id})
+            body: JSON.stringify({id: dataId})
         }).then( (response) => {
             return response.json()
         }).then((result)=>  {
@@ -78,18 +76,17 @@ export default class Index extends Component {
                 icon: <Icon type="frown-o" style={{ color: '#2db7f5' }} />
             });
         });
-        this.setState({ modal2Visible: false });*/
+        this.setState({ modal2Visible: false });
     }
-    setModal2Visible = () => {
+    setModal2Visible = (id) => {
+        dataId = id;
         this.setState({ modal2Visible: true });
     }
     cancelClick = () => {
         this.setState({ modal2Visible: false });
     }
     pageChange = (page) => {
-        console.log(page);
         this.setState({ pageNo: page });
-        console.log(this.state.pageNo);
         setTimeout(() => {
             this.getList();
         }, 50)
@@ -113,20 +110,20 @@ export default class Index extends Component {
             title: '电话',
             dataIndex: 'test_phone',
             key: 'tel'
-        },{
+        },{									
             title: '操作',
             key: 'action',
             render: (text, record) => (
                 <span>
-                    <span href="javascript:;"><Link to={{pathname: "modifyUser/" + record.id +"/" + record.name}}>修改</Link></span>
+                    <span href="javascript:void(0);"><Link to={{pathname: "modifyUser/" + record.test_id +"/" + record.test_name}}>修改</Link></span>
                     <span className="ant-divider" />
-                    <a href="javascript:;" onClick={() => this.setModal2Visible()}>删除</a>
+                    <a href="javascript:void(0);" onClick={() => this.setModal2Visible(record.test_id)}>删除</a>
                     <Modal
                         width={300}
                         title="提示信息！"
                         wrapClassName="vertical-center-modal"
                         visible={this.state.modal2Visible}
-                        onOk={ () => {this.delClick(record.test_id)}}
+                        onOk={this.delClick}
                         onCancel={this.cancelClick}
                     >
                         <div>
