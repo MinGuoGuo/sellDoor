@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { Breadcrumb, Icon,  Pagination} from 'antd';
+import Search from './SearchBox/Search.js';
+import Table from './Content/Content.js';
+import PageList from './Pagination/Pagination.js';
+import './Third.css';
 
 export default class Third extends Component {
 	constructor (props) {
@@ -12,13 +15,19 @@ export default class Third extends Component {
 		console.log(page);
 		this.setState({ pageNo: page });
 		console.log(this.state.pageNo);
-	}
+	} 
 	render () {
         return (
             <div>
-                <h1>我是第三个页面，嘿嘿！</h1>
-                <br />
-                <Pagination showQuickJumper defaultCurrent={this.state.pageNo} total={500} onChange={this.pageChange} />
+            	<div className="search">
+            		<Search />
+            	</div>
+            	<div className="table">
+            		<Table />
+            	</div>
+            	<div>
+            		<PageList />
+            	</div>
             </div>
         )
     }

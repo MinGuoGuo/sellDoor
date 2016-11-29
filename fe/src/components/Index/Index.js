@@ -17,7 +17,8 @@ export default class Index extends Component {
             data: null,
             modal2Visible: false,
             pageNo: 1,
-            totalPage: 20
+            count: 1,
+            loading: false
         }
     }
     componentDidMount = () => {
@@ -31,21 +32,23 @@ export default class Index extends Component {
     //     this.getList();
     // }
     getList = () => {
+        this.setState({ loading: true })
         fetch('http://127.0.0.1/sellDoor/php/list.php', {
             method: 'POST',
             headers: {'Content-Type': 'text/plain'},
-            body: JSON.stringify({page: this.state.pageNo, pagesize: 1})
+            body: JSON.stringify({page: this.state.pageNo, pagesize: 5})
         }).then( (response) => {
                 console.log(response)
                 return response.json()
             }).then((result)=>  {
                 console.log(result);
-                console.log(typeof result.totalpage);
+                console.log(result.totalpage);
                 this.setState({
                     data: result.list,
-                    totalPage: result.totalpage
+                    count: result.count,
+                    loading: false
                 })
-        }).catch((error) => {
+        }).catch((error) => { 
             notification.open({
                 message: '提示信息',
                 description: '服务器爆炸，请求失败!',
@@ -54,7 +57,8 @@ export default class Index extends Component {
         })
     }
     delClick = (id) => {
-        fetch('http://127.0.0.1/sellDoor/php/del.php', {
+        console.log(id);
+        /*fetch('http://127.0.0.1/sellDoor/php/del.php', {
             method: 'POST',
             headers: { 'Content-Type': 'text/plain' },
             body: JSON.stringify({id: id})
@@ -66,6 +70,7 @@ export default class Index extends Component {
                 description: '删除',
                 icon: <Icon type="smile-o" style={{ color: '#2db7f5' }} />
             });
+            this.getList();
         }).catch((error) => {
              notification.open({
                 message: '提示信息',
@@ -73,8 +78,7 @@ export default class Index extends Component {
                 icon: <Icon type="frown-o" style={{ color: '#2db7f5' }} />
             });
         });
-        this.getList();
-        this.setState({ modal2Visible: false });
+        this.setState({ modal2Visible: false });*/
     }
     setModal2Visible = () => {
         this.setState({ modal2Visible: true });
@@ -118,15 +122,15 @@ export default class Index extends Component {
                     <span className="ant-divider" />
                     <a href="javascript:;" onClick={() => this.setModal2Visible()}>删除</a>
                     <Modal
-                        width='300'
+                        width={300}
                         title="提示信息！"
                         wrapClassName="vertical-center-modal"
                         visible={this.state.modal2Visible}
-                        onOk={ () => this.delClick(record.test_id)}
+                        onOk={ () => {this.delClick(record.test_id)}}
                         onCancel={this.cancelClick}
                     >
                         <div>
-                            <Icon type="smile-o" />
+                            <Icon className="icon" type="question-circle-o" />
                             是否删除本条数据？
                         </div>
                     </Modal>
@@ -144,9 +148,9 @@ export default class Index extends Component {
                     </div>
                 </div>
                 <div className="table">
-                    <Table columns={columns} dataSource={this.state.data} />
+                    <Table columns={columns} dataSource={this.state.data} loading={this.state.loading} pagination={false} />
                 </div>
-                <Pagination showQuickJumper defaultCurrent={this.state.pageNo} total={this.state.totalPage} defaultPageSize={1} onChange={this.pageChange} />
+                <Pagination showQuickJumper defaultCurrent={1} current={this.state.pageNo} total={this.state.count} pageSize={5} onChange={this.pageChange} />
             </div>
         )
     }
