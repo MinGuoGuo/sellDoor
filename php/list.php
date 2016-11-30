@@ -10,6 +10,11 @@ $pagesize = $postdata['pagesize'];
 $startrow = ($page - 1)*$pagesize;
 // 查询条件
 $where = '1=1';
+$name = isset($postdata['name'])?$postdata['name']:'';
+$age = isset($postdata['age'])?$postdata['age']:0;
+
+if(!empty($name)) $where .= ' and test_name like %'.$name.'%';
+if(!empty($age)) $where .= ' and test_age = '.$age;
 
 $sqlList = 'select * from test where '.$where.' order by test_id desc limit '.$startrow.','.$pagesize;
 $sqlCount = 'select count(1) as total from test where '.$where;
