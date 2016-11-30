@@ -95,7 +95,7 @@ export default class Index extends Component {
             default:
                 break;
         }
-        this.getList();
+        //this.getList();
     }
     searchClick () {
         this.getList();

@@ -15,7 +15,7 @@ export default class Third extends Component {
 		console.log(page);
 		this.setState({ pageNo: page });
 		console.log(this.state.pageNo);
-	} 
+	}
 	render () {
         return (
             <div>

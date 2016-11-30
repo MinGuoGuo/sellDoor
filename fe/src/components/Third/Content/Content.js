@@ -11,22 +11,28 @@ notification.config({
 
 export default class TableContent extends Component {
 	constructor (props) {
-		super(props)
+		super(props);
 		this.state = {
 			data: null,
 			pageNo: 1,
-			loading: false
+			loading: false,
+            name: '',
+            age: ''
+
 		}
 	}
-	componentDidMount = () => {
-		this.getUserList();
+	componentDidMount () {
+		this.getUserList('','');
 	}
-	getUserList () {
+    componentWillReceiveProps (nextProps) {
+        this.getUserList(nextProps.name, nextProps.age);
+    }
+	getUserList (name, age) {
         this.setState({ loading: true });
         fetch('http://127.0.0.1/sellDoor/php/list.php', {
             method: 'POST',
             headers: {'Content-Type': 'text/plain'},
-            body: JSON.stringify({page: this.state.pageNo, pagesize: 5})
+            body: JSON.stringify({page: this.state.pageNo, pagesize: 100, name: name, age: age})
         }).then( (response) => {
                 console.log(response);
                 return response.json();
@@ -35,7 +41,7 @@ export default class TableContent extends Component {
                 data: result.list,
                 loading: false
             })
-        }).catch((error) => { 
+        }).catch((error) => {
         	this.setState({ loading: false })
             notification.open({
                 message: '提示信息',
@@ -45,6 +51,7 @@ export default class TableContent extends Component {
         })
 	}
 	render () {
+
 		const columns = [{
             title: '姓名',
             dataIndex: 'test_name',
