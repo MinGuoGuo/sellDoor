@@ -7,10 +7,13 @@ import './Index.css';
 //全局配置弹出框样式
 notification.config({
     top: 100,
-    duration: 5,
+    duration: 5
 });
 
 let dataId = '';
+const box = () =>{
+  return 1
+}
 export default class Index extends Component {
     constructor (props) {
         super(props);
@@ -20,9 +23,9 @@ export default class Index extends Component {
             pageNo: 1,
             count: 1,
             loading: false
-        }
+        };
     }
-    componentDidMount = () => {
+    componentDidMount () {
         this.getList();
     }
     //以下两个生命周期不要随便用
@@ -32,21 +35,21 @@ export default class Index extends Component {
     // componentDidUpdate = () => {
     //     this.getList();
     // }
-    getList = () => {
-        this.setState({ loading: true })
+    getList () {
+        this.setState({ loading: true });
         fetch('http://127.0.0.1/sellDoor/php/list.php', {
             method: 'POST',
             headers: {'Content-Type': 'text/plain'},
             body: JSON.stringify({page: this.state.pageNo, pagesize: 5})
         }).then( (response) => {
-                return response.json()
+                return response.json();
             }).then((result)=>  {
                 this.setState({
                     data: result.list,
                     count: result.count,
                     loading: false
-                })
-        }).catch((error) => { 
+                });
+        }).catch((error) => {
             notification.open({
                 message: '提示信息',
                 description: '服务器爆炸，请求失败!',
@@ -54,7 +57,7 @@ export default class Index extends Component {
             });
         })
     }
-    delClick = () => {
+    delClick () {
         console.log(dataId);
         fetch('http://127.0.0.1/sellDoor/php/del.php', {
             method: 'POST',
@@ -78,20 +81,19 @@ export default class Index extends Component {
         });
         this.setState({ modal2Visible: false });
     }
-    setModal2Visible = (id) => {
+    setModal2Visible (id) {
         dataId = id;
         this.setState({ modal2Visible: true });
     }
-    cancelClick = () => {
+    cancelClick () {
         this.setState({ modal2Visible: false });
     }
-    pageChange = (page) => {
+    pageChange (page) {
         this.setState({ pageNo: page });
         setTimeout(() => {
             this.getList();
-        }, 50)
-        
-    } 
+        }, 50);
+    }
     render () {
         const columns = [{
             title: '姓名',
@@ -110,21 +112,21 @@ export default class Index extends Component {
             title: '电话',
             dataIndex: 'test_phone',
             key: 'tel'
-        },{									
+        },{
             title: '操作',
             key: 'action',
             render: (text, record) => (
                 <span>
                     <span href="javascript:void(0);"><Link to={{pathname: "modifyUser/" + record.test_id +"/" + record.test_name}}>修改</Link></span>
                     <span className="ant-divider" />
-                    <a href="javascript:void(0);" onClick={() => this.setModal2Visible(record.test_id)}>删除</a>
+                    <a href="javascript:void(0);" onClick={() => this.setModal2Visible(record.test_id).bind(this)}>删除</a>
                     <Modal
                         width={300}
                         title="提示信息！"
                         wrapClassName="vertical-center-modal"
                         visible={this.state.modal2Visible}
-                        onOk={this.delClick}
-                        onCancel={this.cancelClick}
+                        onOk={this.delClick.bind(this)}
+                        onCancel={this.cancelClick.bind(this)}
                     >
                         <div>
                             <Icon className="icon" type="question-circle-o" />
@@ -147,8 +149,8 @@ export default class Index extends Component {
                 <div className="table">
                     <Table columns={columns} dataSource={this.state.data} loading={this.state.loading} pagination={false} />
                 </div>
-                <Pagination showQuickJumper defaultCurrent={1} current={this.state.pageNo} total={this.state.count} pageSize={5} onChange={this.pageChange} />
+                <Pagination showQuickJumper defaultCurrent={1} current={this.state.pageNo} total={this.state.count} pageSize={5} onChange={this.pageChange.bind(this)} />
             </div>
-        )
+        );
     }
 }
