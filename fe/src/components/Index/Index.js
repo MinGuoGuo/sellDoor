@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, Form, Button, Table, Icon, notification, Modal } from 'antd';
+import { Input, Form, Button, Table, Icon, notification, Modal, Pagination } from 'antd';
 import { Link } from 'react-router';
 import 'whatwg-fetch';
 import './Index.css';
@@ -10,12 +10,16 @@ notification.config({
     duration: 5,
 });
 
+let dataId = '';
 export default class Index extends Component {
     constructor (props) {
         super(props);
         this.state = {
             data: null,
-            modal2Visible: false
+            modal2Visible: false,
+            pageNo: 1,
+            count: 1,
+            loading: false
         }
     }
     componentDidMount = () => {
@@ -29,16 +33,20 @@ export default class Index extends Component {
     //     this.getList();
     // }
     getList = () => {
-        fetch('http://127.0.0.1/sellDoor/php/list.php')
-            .then( (response) => {
-                console.log(response)
+        this.setState({ loading: true })
+        fetch('http://127.0.0.1/sellDoor/php/list.php', {
+            method: 'POST',
+            headers: {'Content-Type': 'text/plain'},
+            body: JSON.stringify({page: this.state.pageNo, pagesize: 5})
+        }).then( (response) => {
                 return response.json()
             }).then((result)=>  {
-                console.log(result);
                 this.setState({
-                    data: result
+                    data: result.list,
+                    count: result.count,
+                    loading: false
                 })
-        }).catch((error) => {
+        }).catch((error) => { 
             notification.open({
                 message: '提示信息',
                 description: '服务器爆炸，请求失败!',
@@ -46,11 +54,12 @@ export default class Index extends Component {
             });
         })
     }
-    delClick = (id) => {
+    delClick = () => {
+        console.log(dataId);
         fetch('http://127.0.0.1/sellDoor/php/del.php', {
             method: 'POST',
             headers: { 'Content-Type': 'text/plain' },
-            body: JSON.stringify({id: id})
+            body: JSON.stringify({id: dataId})
         }).then( (response) => {
             return response.json()
         }).then((result)=>  {
@@ -59,6 +68,7 @@ export default class Index extends Component {
                 description: '删除',
                 icon: <Icon type="smile-o" style={{ color: '#2db7f5' }} />
             });
+            this.getList();
         }).catch((error) => {
              notification.open({
                 message: '提示信息',
@@ -66,15 +76,22 @@ export default class Index extends Component {
                 icon: <Icon type="frown-o" style={{ color: '#2db7f5' }} />
             });
         });
-        this.getList();
         this.setState({ modal2Visible: false });
     }
-    setModal2Visible = () => {
+    setModal2Visible = (id) => {
+        dataId = id;
         this.setState({ modal2Visible: true });
     }
     cancelClick = () => {
         this.setState({ modal2Visible: false });
     }
+    pageChange = (page) => {
+        this.setState({ pageNo: page });
+        setTimeout(() => {
+            this.getList();
+        }, 50)
+        
+    } 
     render () {
         const columns = [{
             title: '姓名',
@@ -93,24 +110,24 @@ export default class Index extends Component {
             title: '电话',
             dataIndex: 'test_phone',
             key: 'tel'
-        },{
+        },{									
             title: '操作',
             key: 'action',
             render: (text, record) => (
                 <span>
-                    <span href="javascript:;"><Link to={{pathname: "modifyUser/" + record.id +"/" + record.name, query: {name: record.name, age: record.age}}}>修改</Link></span>
+                    <span href="javascript:void(0);"><Link to={{pathname: "modifyUser/" + record.test_id +"/" + record.test_name}}>修改</Link></span>
                     <span className="ant-divider" />
-                    <a href="javascript:;" onClick={() => this.setModal2Visible()}>删除</a>
+                    <a href="javascript:void(0);" onClick={() => this.setModal2Visible(record.test_id)}>删除</a>
                     <Modal
-                        width='300'
+                        width={300}
                         title="提示信息！"
                         wrapClassName="vertical-center-modal"
                         visible={this.state.modal2Visible}
-                        onOk={ () => this.delClick(record.test_id)}
+                        onOk={this.delClick}
                         onCancel={this.cancelClick}
                     >
                         <div>
-                            <Icon type="smile-o" />
+                            <Icon className="icon" type="question-circle-o" />
                             是否删除本条数据？
                         </div>
                     </Modal>
@@ -128,8 +145,9 @@ export default class Index extends Component {
                     </div>
                 </div>
                 <div className="table">
-                    <Table columns={columns} dataSource={this.state.data} />
+                    <Table columns={columns} dataSource={this.state.data} loading={this.state.loading} pagination={false} />
                 </div>
+                <Pagination showQuickJumper defaultCurrent={1} current={this.state.pageNo} total={this.state.count} pageSize={5} onChange={this.pageChange} />
             </div>
         )
     }

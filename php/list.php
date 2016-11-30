@@ -24,7 +24,7 @@ try {
 	$count = $conn->query($sqlCount)->fetchAll(PDO::FETCH_ASSOC);
 	$result['list']		= $list;
 	$result['count']	= $count[0]['total'];
-	$result['totalpage']= (int)ceil($pagesize/$result['count']);
+	$result['totalpage']= (int)ceil($result['count']/$pagesize);
 	if($result) {
 		echo json_encode($result);
 		die;
