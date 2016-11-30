@@ -22,7 +22,9 @@ export default class Index extends Component {
             modal2Visible: false,
             pageNo: 1,
             count: 1,
-            loading: false
+            loading: false,
+            age: '',
+            name: ''
         };
     }
     componentDidMount () {
@@ -40,7 +42,7 @@ export default class Index extends Component {
         fetch('http://127.0.0.1/sellDoor/php/list.php', {
             method: 'POST',
             headers: {'Content-Type': 'text/plain'},
-            body: JSON.stringify({page: this.state.pageNo, pagesize: 5})
+            body: JSON.stringify({page: this.state.pageNo, pagesize: 5, name: this.state.name, age: this.state.age})
         }).then( (response) => {
                 return response.json();
             }).then((result)=>  {
@@ -80,6 +82,23 @@ export default class Index extends Component {
             });
         });
         this.setState({ modal2Visible: false });
+    }
+    getValue (e) {
+        let type = e.target.getAttribute('data-type');
+        switch (type) {
+            case 'name':
+                this.setState({ name: e.target.value });
+                break;
+            case 'age':
+                this.setState({ age: e.target.value });
+                break;
+            default:
+                break;
+        }
+        this.getList();
+    }
+    searchClick () {
+        this.getList();
     }
     setModal2Visible (id) {
         dataId = id;
@@ -139,9 +158,9 @@ export default class Index extends Component {
         return (
             <div className="index">
                 <div className="search">
-                    姓名：<Input size="large" style={{width: 160, marginRight: 40}} placeholder="姓名"/>
-                    年龄：<Input size="large" style={{width: 160, marginRight: 40}} placeholder="年龄"/>
-                    <Button type="primary" size="large">搜索</Button>
+                    姓名：<Input size="large" data-type="name" style={{width: 160, marginRight: 40}} onChange={this.getValue.bind(this)} placeholder="姓名"/>
+                    年龄：<Input size="large" data-type="age" style={{width: 160, marginRight: 40}} onChange={this.getValue.bind(this)} placeholder="年龄"/>
+                    <Button type="primary" size="large" onClick={this.searchClick.bind(this)}>搜索</Button>
                     <div style={{marginTop: 20}}>
                         <Button type="primary" size="large"><Link to="/addUser">新建</Link></Button>
                     </div>
