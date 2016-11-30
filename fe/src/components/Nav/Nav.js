@@ -16,7 +16,6 @@ export default class Sider extends Component {
         }
     }
     handleClick = (e) => {
-        console.log(this.state);
         this.setState({ current: e.key });
     }
     onOpenChange =(openKeys) => {
@@ -52,12 +51,12 @@ export default class Sider extends Component {
                     className="nav"
                 >
                     <SubMenu key="sub1" title={<span><Icon type="mail" /><span>Navigation One</span></span>}>
-                        <Menu.Item key="1"><Link to="/index">Option 1</Link></Menu.Item>
-                        <Menu.Item key="2"><Link to="/second">Option 2</Link></Menu.Item>
+                        <Menu.Item key="1"><Link to="/index">全部在一个组件里面的交互</Link></Menu.Item>
+                        <Menu.Item key="2"><Link to="/second">父组件向子组件传递数据</Link></Menu.Item>
                         <Menu.Item key="3"><Link to="/third">Option 3</Link></Menu.Item>
                     </SubMenu>
                     <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>Navigation Two</span></span>}>
-                        <Menu.Item key="5">Option 5</Menu.Item>
+                        <Menu.Item key="5"><Link to="/four">子组件向父组件传递数据</Link></Menu.Item>
                         <Menu.Item key="6">Option 6</Menu.Item>
                         <SubMenu key="sub3" title="Submenu">
                             <Menu.Item key="7">Option 7</Menu.Item>
