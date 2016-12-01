@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ChildBtn from './child/Child.js';
+import { Link } from 'react-router';
 import './four.css';
 import 'whatwg-fetch';
 
@@ -37,24 +38,6 @@ export default class Four extends Component {
     }
     render () {
         let result = this.state.data;
-        console.log(result);
-        const data = [
-            {
-                test_age: 25,
-                test_name:"小汉",
-                test_phone: 2147483647,
-                test_sex: "女",
-                id: 2
-            },
-            {
-                test_age: 25,
-                test_id: 43,
-                test_name:"小汉",
-                test_phone: 2147483647,
-                test_sex: "女",
-                id: 3
-            }
-        ]
         return (
             <div>
                 <table className="table">
@@ -79,9 +62,9 @@ export default class Four extends Component {
                                         <td>{item.test_sex}</td>
                                         <td>{item.test_phone}</td>
                                         <td>
-                                            <span onClick={this.delClick.bind(this, item.id)}>修改</span>
+                                            <span><Link to={{pathname: "modifyUser/" + item.test_id + "/" + item.test_name}}>修改</Link></span>
                                             <span>丨</span>
-                                            <span>删除</span>
+                                            <span onClick={this.delClick.bind(this, item.test_id)}>删除</span>
                                         </td>
                                     </tr>
                                 )
