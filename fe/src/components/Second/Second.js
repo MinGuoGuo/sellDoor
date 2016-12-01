@@ -27,7 +27,7 @@ export default class Second extends Component {
 		});
 	}
 	searchClick () {
-
+		// 可以点击搜索按钮
 	}
     render () {
         return (

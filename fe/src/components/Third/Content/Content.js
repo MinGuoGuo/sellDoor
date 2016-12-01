@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { Table, notification, Icon } from 'antd';
 import 'whatwg-fetch';
+import PageList from '../Pagination/Pagination.js';
 
 //全局配置弹出框样式
 notification.config({
@@ -16,8 +17,9 @@ export default class TableContent extends Component {
 			data: null,
 			pageNo: 1,
 			loading: false,
-            name: '',
-            age: ''
+            name: this.props.name,
+            age: this.props.age,
+            count: 1
 
 		}
 	}
@@ -32,15 +34,15 @@ export default class TableContent extends Component {
         fetch('http://127.0.0.1/sellDoor/php/list.php', {
             method: 'POST',
             headers: {'Content-Type': 'text/plain'},
-            body: JSON.stringify({page: this.state.pageNo, pagesize: 100, name: name, age: age})
+            body: JSON.stringify({page: this.state.pageNo, pagesize: 5, name: name, age: age})
         }).then( (response) => {
-                console.log(response);
                 return response.json();
         }).then((result)=>  {
             this.setState({
                 data: result.list,
-                loading: false
-            })
+                loading: false,
+                count: result.count
+            });
         }).catch((error) => {
         	this.setState({ loading: false })
             notification.open({
@@ -50,8 +52,13 @@ export default class TableContent extends Component {
             });
         })
 	}
+    getPage (newPage) {
+        this.setState({ pageNo: newPage });
+        setTimeout(() => {
+            this.getUserList();
+        }, 50)
+    }
 	render () {
-
 		const columns = [{
             title: '姓名',
             dataIndex: 'test_name',
@@ -83,6 +90,7 @@ export default class TableContent extends Component {
 		return(
 			<div>
 				<Table columns={columns} dataSource={this.state.data} loading={this.state.loading} pagination={false} />
+                <PageList getNewPage={this.getPage.bind(this)} page={this.state.pageNo} count={this.state.count}/>
 			</div>
 		)
 	}

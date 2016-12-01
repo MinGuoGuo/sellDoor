@@ -7,7 +7,8 @@ import AddUser from './components/Index/AddUser/AddUser';
 import ModifyUser from './components/Index/ModifyUser/ModifyUser';
 import Second from './components/Second/Second';
 import Third from './components/Third/Third';
-import Four from './components/four/Four.js'
+import Four from './components/four/Four.js';
+import Five from './components/Five/Five.js';
 
 /*
 * 以下方法是直接将组件渲染出来；下面我们看看如何用路由的形式将组件渲染出来
@@ -29,6 +30,7 @@ render((
             <Route path="/second" component={Second} />
             <Route path="/third" component={Third} />
             <Route path="/four" component={Four} />
+            <Route path="/five" component={Five} />
         </Route>
     </Router>
 ), document.getElementById('root'));

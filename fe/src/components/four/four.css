@@ -1,0 +1,6 @@
+.table th, .table td {
+    border: 1px #ccc solid;
+}
+.table span{
+    cursor: pointer;
+}

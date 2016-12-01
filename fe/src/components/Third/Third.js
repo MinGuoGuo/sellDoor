@@ -1,32 +1,32 @@
 import React, { Component } from 'react';
 import Search from './SearchBox/Search.js';
 import Table from './Content/Content.js';
-import PageList from './Pagination/Pagination.js';
 import './Third.css';
 
 export default class Third extends Component {
 	constructor (props) {
 		super(props)
 		this.state = {
-			pageNo: 1
+			pageNo: 1,
+			count: 1,
+			name: '',
+			age: ''
 		}
 	}
-	pageChange = (page) => {
-		console.log(page);
-		this.setState({ pageNo: page });
-		console.log(this.state.pageNo);
+	getNewValue (name, age) {
+		this.setState({
+			name: name,
+			age: age
+		});
 	}
 	render () {
         return (
             <div>
             	<div className="search">
-            		<Search />
+            		<Search getValue={this.getNewValue.bind(this)} name={this.state.name} age={this.state.age}/>
             	</div>
             	<div className="table">
-            		<Table />
-            	</div>
-            	<div>
-            		<PageList />
+            		<Table name={this.state.name} age={this.state.age}/>
             	</div>
             </div>
         )
