@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import ReactDOM, { render } from 'react-dom';
-import { Router, Route, hashHistory, browserHistory, IndexRoute } from 'react-router';
+import React, {Component} from 'react';
+import ReactDOM, {render} from 'react-dom';
+import {Router, Route, hashHistory, browserHistory, IndexRoute} from 'react-router';
 import Home from './components/Home/Home';
 import Index from './components/Index/Index';
 import AddUser from './components/Index/AddUser/AddUser';
@@ -11,28 +11,35 @@ import Four from './components/four/Four.js';
 import Five from './components/Five/Five.js';
 import Six from './components/six-redux/Six.js'
 
+
+import {Provider} from "react-redux";
+import Container from "./components/six-redux/container/Container.js";
+import configureStore from './components/six-redux/store/Store.js'
+
 /*
-* 以下方法是直接将组件渲染出来；下面我们看看如何用路由的形式将组件渲染出来
-* */
+ * 以下方法是直接将组件渲染出来；下面我们看看如何用路由的形式将组件渲染出来
+ * */
 /*render(
-     <Home />,
-     document.getElementById('root')
+ <Home />,
+ document.getElementById('root')
  );*/
 
 /*
-* 将组件直接挂载在路由上；
-* */
+ * 将组件直接挂载在路由上；
+ * */
 render((
-    <Router history={hashHistory}>
-        <Route path="/" component={Home}>
-            <Route path="/index" component={Index} />
-            <Route path="/addUser" component={AddUser} />
-            <Route path="/modifyUser/:id/:name" component={ModifyUser} />
-            <Route path="/second" component={Second} />
-            <Route path="/third" component={Third} />
-            <Route path="/four" component={Four} />
-            <Route path="/five" component={Five} />
-            <Route path="/six" component={Six} />
-        </Route>
-    </Router>
+    <Provider store={store}>
+        <Router history={hashHistory}>
+            <Route path="/" component={Home}>
+                <Route path="/index" component={Index}/>
+                <Route path="/addUser" component={AddUser}/>
+                <Route path="/modifyUser/:id/:name" component={ModifyUser}/>
+                <Route path="/second" component={Second}/>
+                <Route path="/third" component={Third}/>
+                <Route path="/four" component={Four}/>
+                <Route path="/five" component={Five}/>
+                <Route path="/six" component={Six}/>
+            </Route>
+        </Router>
+    </Provider>
 ), document.getElementById('root'));
