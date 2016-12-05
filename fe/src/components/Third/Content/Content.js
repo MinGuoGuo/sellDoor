@@ -27,6 +27,7 @@ export default class TableContent extends Component {
 		this.getUserList('','');
 	}
     componentWillReceiveProps (nextProps) {
+        console.log(nextProps);
         this.getUserList(nextProps.name, nextProps.age);
     }
 	getUserList (name, age) {

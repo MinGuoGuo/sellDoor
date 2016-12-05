@@ -5,14 +5,15 @@
 import {SEARCH} from '../action/Action.js';
 const text = {name: '', age: ''}
 export default function search(state = text, action) {
+
     switch (action.type) {
         case SEARCH:
             return {
-                text: action.text
+                'value': action.text
             }
         default:
             return {
-                text: text
+                'value': text
             }
     }
 }

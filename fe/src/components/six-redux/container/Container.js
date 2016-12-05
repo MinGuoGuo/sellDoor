@@ -4,15 +4,15 @@
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import Six from '../Six.jsx';
+import Six from '../Six.js';
 import * as Action from '../action/Action.js';
 
 function mapStateToProps(state) {
-    return {search:state.search}
+    return {value: state.value}
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators(Action,dispatch);
+    return bindActionCreators(Action, dispatch);
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Six)
+export default connect(mapStateToProps, mapDispatchToProps)(Six)

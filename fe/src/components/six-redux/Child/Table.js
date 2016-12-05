@@ -33,8 +33,7 @@ export default class TableContent extends Component {
     }
 
     getUserList(name, age) {
-        let {name, age} = this.props;
-
+        //let {name, age} = this.props;
         this.setState({loading: true});
         fetch('http://127.0.0.1/sellDoor/php/list.php', {
             method: 'POST',

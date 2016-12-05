@@ -9,10 +9,10 @@ import Second from './components/Second/Second';
 import Third from './components/Third/Third';
 import Four from './components/four/Four.js';
 import Five from './components/Five/Five.js';
-import Six from './components/six-redux/Six.js'
+import SixContainer from './components/six-redux/container/Container.js'
 
 
-import {Provider} from "react-redux";
+import { Provider } from "react-redux";
 import Container from "./components/six-redux/container/Container.js";
 import configureStore from './components/six-redux/store/Store.js'
 
@@ -27,8 +27,10 @@ import configureStore from './components/six-redux/store/Store.js'
 /*
  * 将组件直接挂载在路由上；
  * */
+const appStore = configureStore();
+
 render((
-    <Provider store={store}>
+    <Provider store={appStore}>
         <Router history={hashHistory}>
             <Route path="/" component={Home}>
                 <Route path="/index" component={Index}/>
@@ -38,7 +40,7 @@ render((
                 <Route path="/third" component={Third}/>
                 <Route path="/four" component={Four}/>
                 <Route path="/five" component={Five}/>
-                <Route path="/six" component={Six}/>
+                <Route path="/six" component={SixContainer}/>
             </Route>
         </Router>
     </Provider>

@@ -9,5 +9,4 @@ export function search(text) {
         type: SEARCH,
         payload: text
     }
-
 }
