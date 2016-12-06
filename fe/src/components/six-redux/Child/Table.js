@@ -17,8 +17,8 @@ export default class TableContent extends Component {
             data: null,
             pageNo: 1,
             loading: false,
-            name: this.props.name,
-            age: this.props.age,
+            //name: this.props.name,
+            //age: this.props.age,
             count: 1
 
         }
@@ -29,11 +29,12 @@ export default class TableContent extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.getUserList(nextProps.name, nextProps.age);
+        // console.log(1);
+        // console.log('啦啦啦', nextProps.person.name);
+        this.getUserList(nextProps.person.name, nextProps.person.age);
     }
 
     getUserList(name, age) {
-        //let {name, age} = this.props;
         this.setState({loading: true});
         fetch('http://127.0.0.1/sellDoor/php/list.php', {
             method: 'POST',

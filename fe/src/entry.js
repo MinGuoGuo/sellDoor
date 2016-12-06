@@ -10,13 +10,14 @@ import Second from './components/Second/Second';
 import Third from './components/Third/Third';
 import Four from './components/four/Four.js';
 import Five from './components/Five/Five.js';
-import SixContainer from './components/six-redux/container/Container.js'
+import Six from './components/six-redux/Six.js'
 import Eight from './components/Eight/Eight.js';
 
 
 //redux来控制的；
 import { Provider } from "react-redux";
 import Container from "./redux/container/container.js";
+import searchContainer from './redux/container/searchContainer.js';
 import rootStore from './redux/store/store.js';
 import EightContainer from './redux/container/container.js';
 
@@ -44,7 +45,7 @@ render((
                 <Route path="/third" component={Third}/>
                 <Route path="/four" component={Four}/>
                 <Route path="/five" component={Five}/>
-                {/* <Route path="/six" component={SixContainer}/> */}
+                <Route path="/six" component={searchContainer}/>
                 <Route path="/eight" component={EightContainer}/>
             </Route>
         </Router>

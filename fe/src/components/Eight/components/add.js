@@ -5,9 +5,12 @@ export default class Add extends Component {
     constructor (props) {
         super (props);
     }
+    addClick () {
+        this.props.add(4);
+    }
     render () {
         return (
-            <Button type="primary" onClick={ () =>  {this.props.add(4)}}>+</Button>
+            <Button type="primary" onClick={this.addClick.bind(this)}>+</Button>
         )
     }
 }

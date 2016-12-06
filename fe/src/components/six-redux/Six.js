@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Search from './Child/Search.js';
 import Table from './Child/Table.js';
 
@@ -7,8 +7,8 @@ export default class Six extends Component {
         super (props);
     }
     render () {
-        const {search,value} = this.props;
-        console.log("six",this.props.value);
+        const { search, person } = this.props;
+        console.log('person', person);
         return (
             <div>
                 <h1>
@@ -18,9 +18,15 @@ export default class Six extends Component {
                     <Search search={search} />
                 </div>
                 <div>
-                    <Table text={value} />
+                    <Table person={person} />
                 </div>
             </div>
         )
     }
+}
+
+// 限制组件安全；
+Six.PropTypes = {
+    person: PropTypes.object.isRequired,
+    search: PropTypes.func.isRequired
 }
