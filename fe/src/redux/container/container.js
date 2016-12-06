@@ -6,7 +6,7 @@ import * as Action from '../action/action.js';
 //将state绑定到ui组件上去；
 const mapStateToProps = (state) => {
     return {
-        number: state.number
+        figure: state.numbers
     }
 }
 

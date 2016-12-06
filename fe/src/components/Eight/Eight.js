@@ -8,12 +8,12 @@ export default class Eight extends Component {
         super (props);
     }
     render () {
-        const { add, sub, number } = this.props;
+        const { add, sub, figure } = this.props;
         return (
             <div>
                 <h1>redux组件与组件交互并且传参</h1>
                 <div style={{margin: '20px 0'}}>
-                    <View number={number} />
+                    <View number={figure} />
                 </div>
                 <div>
                     <Sub sub={sub}/>
@@ -29,5 +29,5 @@ export default class Eight extends Component {
 Eight.PropTypes = {
     sub: PropTypes.func.isRequired,
     add: PropTypes.func.isRequired,
-    number: PropTypes.object.isRequired
+    figure: PropTypes.object.isRequired
 }

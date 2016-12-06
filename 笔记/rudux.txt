@@ -1,0 +1,22 @@
+一下是redux的学习中遇到的一些小问题；
+1、 首先建立redux目录结构层分为四个文件夹，action， container， reducer， store
+2、 container里面的
+    const mapStateToProps= (state) => {
+        x: state.y
+    }；
+    这里的x变量是和components里面的UI组件里的
+    App.PropTypes = {
+        X: PropTypes.number.isRequired
+    };
+    限制的组件安全的x是一一对应的关系，(*注： number只是随便举得一个例子，具体视定义的x变量类型而定)；
+    而后面的state.y里面的y是和reducer里面的
+    const rootRrducer = combineReducer({
+        y,
+        ...
+    });
+    相对应的；
+3、 一个redux只有一根reducer(rootRrducer), 通过redux里面封装的combineReducers来合并多个reducer，实例如下：
+    const rootRrducer = combineReducers({
+        x, y, z
+    });
+    (*注： x, y, z都是单个reducer)；
