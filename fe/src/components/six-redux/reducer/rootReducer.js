@@ -6,7 +6,7 @@ import search from './reducer.js'
 
 //使用redux的combineReducers方法将所有reducer打包起来
 const rootReducer = combineReducers({
-    search,
+    search
 })
 
 export default rootReducer

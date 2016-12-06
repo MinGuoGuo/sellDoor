@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM, {render} from 'react-dom';
 import {Router, Route, hashHistory, browserHistory, IndexRoute} from 'react-router';
+
 import Home from './components/Home/Home';
 import Index from './components/Index/Index';
 import AddUser from './components/Index/AddUser/AddUser';
@@ -10,11 +11,14 @@ import Third from './components/Third/Third';
 import Four from './components/four/Four.js';
 import Five from './components/Five/Five.js';
 import SixContainer from './components/six-redux/container/Container.js'
+import Eight from './components/Eight/Eight.js';
 
 
+//redux来控制的；
 import { Provider } from "react-redux";
-import Container from "./components/six-redux/container/Container.js";
-import configureStore from './components/six-redux/store/Store.js'
+import Container from "./redux/container/container.js";
+import rootStore from './redux/store/store.js';
+import EightContainer from './redux/container/container.js';
 
 /*
  * 以下方法是直接将组件渲染出来；下面我们看看如何用路由的形式将组件渲染出来
@@ -27,7 +31,7 @@ import configureStore from './components/six-redux/store/Store.js'
 /*
  * 将组件直接挂载在路由上；
  * */
-const appStore = configureStore();
+const appStore = rootStore();
 
 render((
     <Provider store={appStore}>
@@ -40,7 +44,8 @@ render((
                 <Route path="/third" component={Third}/>
                 <Route path="/four" component={Four}/>
                 <Route path="/five" component={Five}/>
-                <Route path="/six" component={SixContainer}/>
+                {/* <Route path="/six" component={SixContainer}/> */}
+                <Route path="/eight" component={EightContainer}/>
             </Route>
         </Router>
     </Provider>
