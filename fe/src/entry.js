@@ -12,6 +12,7 @@ import Four from './components/four/Four.js';
 import Five from './components/Five/Five.js';
 import Six from './components/six-redux/Six.js'
 import Eight from './components/Eight/Eight.js';
+import Seven from './components/Seven/Seven.js'
 
 
 //redux来控制的；
@@ -20,7 +21,8 @@ import Container from "./redux/container/container.js";
 import searchContainer from './redux/container/searchContainer.js';
 import rootStore from './redux/store/store.js';
 import EightContainer from './redux/container/container.js';
-
+import SevenCoontainer from './redux/container/sevenContaier.js'
+import childContainer from './redux/container/childContainer.js'
 /*
  * 以下方法是直接将组件渲染出来；下面我们看看如何用路由的形式将组件渲染出来
  * */
@@ -46,7 +48,9 @@ render((
                 <Route path="/four" component={Four}/>
                 <Route path="/five" component={Five}/>
                 <Route path="/six" component={searchContainer}/>
+                <Route path="/seven" component={SevenCoontainer} />
                 <Route path="/eight" component={EightContainer}/>
+                <Route path="/child" component={childContainer}/>
             </Route>
         </Router>
     </Provider>
