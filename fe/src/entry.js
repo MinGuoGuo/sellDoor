@@ -12,7 +12,8 @@ import Four from './components/four/Four.js';
 import Five from './components/Five/Five.js';
 import Six from './components/six-redux/Six.js'
 import Eight from './components/Eight/Eight.js';
-import Seven from './components/Seven/Seven.js'
+import Seven from './components/Seven/Seven.js';
+import addUsers from './components/Third/addUser/addUsers.js'
 
 
 //redux来控制的；
@@ -51,6 +52,7 @@ render((
                 <Route path="/seven" component={SevenCoontainer} />
                 <Route path="/eight" component={EightContainer}/>
                 <Route path="/child" component={childContainer}/>
+                <Route path="/addusers" component={addUsers} />
             </Route>
         </Router>
     </Provider>

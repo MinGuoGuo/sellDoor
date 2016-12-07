@@ -18,7 +18,7 @@ export default class Search extends Component {
                 年龄：<input size="large" ref="age" onChange={this.getValue.bind(this)} style={{width: 160, marginRight: 40}} placeholder="年龄"/>
                 <Button type="primary" size="large">搜索</Button>
                 <div style={{marginTop: 20}}>
-                    <Button type="primary" size="large"><Link to="/addUser">新建</Link></Button>
+                    <Button type="primary" size="large"><Link to="/addUsers">新建</Link></Button>
                 </div>
 			</div>
 		)

@@ -58,7 +58,7 @@ export default class AddUser extends Component {
         });
         fetch('http://127.0.0.1/sellDoor/php/add.php', {
             method: 'POST',
-            headers: {   
+            headers: {
                 'Content-Type': 'text/plain'
             },
             body: JSON.stringify(this.state)
@@ -90,7 +90,7 @@ export default class AddUser extends Component {
                     _this.setState({ loading: false });
                 }
             });
-            
+
         })
     }
     render () {
