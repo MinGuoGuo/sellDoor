@@ -5,7 +5,7 @@ import View from './components/children1.js';
 import { Button } from 'antd';
 import { Link } from 'react-router';
 
-export default class Eight extends Component {
+export default class Seven extends Component {
     constructor (props) {
         super (props);
     }
@@ -18,7 +18,7 @@ export default class Eight extends Component {
                     <View number={number} />
                 </div>
                 <div style={{marginBottom: 20}}>
-                    <Sub sub={sub}/>
+                    <Sub sub={sub} />
                     <span style={{margin: '0 5px'}}></span>
                     <Add add={add} />
                 </div>
@@ -29,8 +29,8 @@ export default class Eight extends Component {
 }
 
 //限制组件安全
-Eight.PropTypes = {
+Seven.PropTypes = {
     sub: PropTypes.func.isRequired,
     add: PropTypes.func.isRequired,
-    number: PropTypes.object.isRequired
+    number: PropTypes.number.isRequired
 }

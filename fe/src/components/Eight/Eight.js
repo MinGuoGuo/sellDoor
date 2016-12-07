@@ -29,5 +29,5 @@ export default class Eight extends Component {
 Eight.PropTypes = {
     sub: PropTypes.func.isRequired,
     add: PropTypes.func.isRequired,
-    figure: PropTypes.object.isRequired
+    figure: PropTypes.number.isRequired
 }
