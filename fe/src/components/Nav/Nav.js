@@ -58,8 +58,8 @@ export default class Sider extends Component {
                     <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>Navigation Two</span></span>}>
                         <Menu.Item key="5"><Link to="/four">map遍历</Link></Menu.Item>
                         <Menu.Item key="6"><Link to="/five">子组件向父组件传值改变状态</Link></Menu.Item>
-                        <SubMenu key="sub3" title="Submenu">
-                            <Menu.Item key="7">Option 7</Menu.Item>
+                        <SubMenu key="sub3" title="子菜单">
+                            <Menu.Item key="7"><Link to="/ten">返回顶部按钮</Link></Menu.Item>
                             <Menu.Item key="8">Option 8</Menu.Item>
                         </SubMenu>
                     </SubMenu>

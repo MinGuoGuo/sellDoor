@@ -15,6 +15,7 @@ import Eight from './components/Eight/Eight.js';
 import Seven from './components/Seven/Seven.js';
 import addUsers from './components/Third/addUser/addUsers.js'
 import Nine from './components/nine/Nine.js'
+import Ten from './components/childComponent/first/child.js'
 
 
 //redux来控制的；
@@ -55,6 +56,7 @@ render((
                 <Route path="/child" component={childContainer}/>
                 <Route path="/addusers" component={addUsers} />
                 <Route path="/nine" component={Nine} />
+                <Route path="/ten" component={Ten} />
             </Route>
         </Router>
     </Provider>
