@@ -24,6 +24,7 @@
     "dora": "0.4.x",
     "dora-plugin-proxy": "^0.8.5",
     "dora-plugin-webpack": "0.8.1",
+    "dora-plugin-webpack-hmr": "^0.2.1",
     "eslint": "^2.12.0",
     "eslint-config-airbnb": "^9.0.1",
     "eslint-plugin-import": "^1.8.1",
@@ -39,7 +40,7 @@
   "scripts": {
     "build": "atool-build",
     "lint": "eslint --ext .js,.jsx src/",
-    "start": "dora --plugins webpack,proxy",
+    "start": "dora --port 9999 --plugins \"proxy?watchDirs=./src,webpack,webpack-hmr\"",
     "test": "atool-test-mocha ./**/__tests__/*-test.js"
   }
 }

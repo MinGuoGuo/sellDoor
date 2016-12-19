@@ -60,7 +60,7 @@ export default class Sider extends Component {
                         <Menu.Item key="6"><Link to="/five">子组件向父组件传值改变状态</Link></Menu.Item>
                         <SubMenu key="sub3" title="子菜单">
                             <Menu.Item key="7"><Link to="/ten">返回顶部按钮</Link></Menu.Item>
-                            <Menu.Item key="8">Option 8</Menu.Item>
+                            <Menu.Item key="8"><Link to="eleven">三个子组件进行交互</Link></Menu.Item>
                         </SubMenu>
                     </SubMenu>
                     <SubMenu key="sub4" title={<span><Icon type="setting" /><span>Navigation Three</span></span>}>
@@ -68,7 +68,7 @@ export default class Sider extends Component {
                         <Menu.Item key="10"><Link to="/eight">redux子组件交互并传参</Link></Menu.Item>
                         <Menu.Item key="11"><Link to="/seven">redux两个独立组件交互</Link></Menu.Item>
                         <Menu.Item key="12"><Link to="/nine">测试按钮</Link></Menu.Item>
-                        <Menu.Item key="13">Option 9</Menu.Item>
+                        <Menu.Item key="13">O</Menu.Item>
                         <Menu.Item key="14">Option 10</Menu.Item>
                         <Menu.Item key="15">Option 11</Menu.Item>
                         <Menu.Item key="16">Option 12</Menu.Item>
