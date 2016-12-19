@@ -26,7 +26,7 @@ export default class Eight extends Component {
 }
 
 //限制组件安全
-Eight.PropTypes = {
+Eight.propTypes = {
     sub: PropTypes.func.isRequired,
     add: PropTypes.func.isRequired,
     figure: PropTypes.number.isRequired

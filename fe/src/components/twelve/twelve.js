@@ -12,8 +12,11 @@ export default class Twelve extends Component {
         if (index > 0 && index < 10) {
             let refName = 'input' + index;
             console.log(refName);
-            // inputDome = React.findDomeNode(this.refs[refName]);
-            let inputDome = this.refs[refName].getDOMNode();
+            console.log(this.refs[refName]);
+            // inputDome = React.findDOMNode(this.refs[refName]);
+            // inputDome =  this.refs[refName].getDOMNode();
+            // getDOMNode()方法和findDOMNode貌似在这个里边儿已经被废弃；
+            let inputDome = this.refs[refName];
             inputDome.focus();
         }
     }

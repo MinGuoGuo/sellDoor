@@ -13,18 +13,14 @@ import Five from './components/Five/Five.js';
 import Six from './components/six-redux/Six.js'
 import Eight from './components/Eight/Eight.js';
 import Seven from './components/Seven/Seven.js';
-<<<<<<< HEAD
-import addUsers from './components/Third/addUser/addUsers.js'
-import Nine from './components/nine/Nine.js'
-import Ten from './components/childComponent/first/child.js'
-import Eleven from './components/eleven/eleven.js'
-=======
 import addUsers from './components/Third/addUser/addUsers.js';
 import Nine from './components/nine/Nine.js';
 import Ten from './components/childComponent/first/child.js';
-import twelve from './components/twelve/twelve.js'
->>>>>>> b6f0ca3c48a6bcb518a6afdd610fa4e272a05a47
-
+import Eleven from './components/eleven/eleven.js';
+import twelve from './components/twelve/twelve.js';
+import thirteen from './components/thirteen/thirteen.js';
+import Test from './components/test/test.js';
+import Fourteen from './components/fourteen/fourteen.js';
 
 //redux来控制的；
 import { Provider } from "react-redux";
@@ -51,6 +47,7 @@ render((
     <Provider store={appStore}>
         <Router history={hashHistory}>
             <Route path="/" component={Home}>
+                <IndexRoute component={Index} />
                 <Route path="/index" component={Index}/>
                 <Route path="/addUser" component={AddUser}/>
                 <Route path="/modifyUser/:id/:name" component={ModifyUser}/>
@@ -65,11 +62,11 @@ render((
                 <Route path="/addusers" component={addUsers} />
                 <Route path="/nine" component={Nine} />
                 <Route path="/ten" component={Ten} />
-<<<<<<< HEAD
                 <Route path="/eleven" component={Eleven} />
-=======
                 <Route path="/twelve" component={twelve} />
->>>>>>> b6f0ca3c48a6bcb518a6afdd610fa4e272a05a47
+                <Route path="/thirteen" component={thirteen} />
+                <Route path="/test" component={Test} />
+                <Route path="/fourteen" component={Fourteen} />
             </Route>
         </Router>
     </Provider>

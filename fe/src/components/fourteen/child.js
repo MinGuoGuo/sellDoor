@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 
-export default class View extends Component {
+export default class Fourteen extends Component {
     constructor (props) {
         super (props);
+    }
+    componentWillReceiveProps (obj) {
+        console.log(obj);
     }
     render () {
         return (
             <div>
-                <h3>total  <span style={{color: 'red'}}>{this.props.number}</span>  times </h3>
+                curren no is <span>{this.props.num}</span>
             </div>
         )
     }
