@@ -68,7 +68,11 @@ export default class Sider extends Component {
                         <Menu.Item key="10"><Link to="/eight">redux子组件交互并传参</Link></Menu.Item>
                         <Menu.Item key="11"><Link to="/seven">redux两个独立组件交互</Link></Menu.Item>
                         <Menu.Item key="12"><Link to="/nine">测试按钮</Link></Menu.Item>
+<<<<<<< HEAD
                         <Menu.Item key="13">O</Menu.Item>
+=======
+                        <Menu.Item key="13"><Link to="/twelve">ref练习</Link></Menu.Item>
+>>>>>>> b6f0ca3c48a6bcb518a6afdd610fa4e272a05a47
                         <Menu.Item key="14">Option 10</Menu.Item>
                         <Menu.Item key="15">Option 11</Menu.Item>
                         <Menu.Item key="16">Option 12</Menu.Item>

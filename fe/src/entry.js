@@ -13,10 +13,17 @@ import Five from './components/Five/Five.js';
 import Six from './components/six-redux/Six.js'
 import Eight from './components/Eight/Eight.js';
 import Seven from './components/Seven/Seven.js';
+<<<<<<< HEAD
 import addUsers from './components/Third/addUser/addUsers.js'
 import Nine from './components/nine/Nine.js'
 import Ten from './components/childComponent/first/child.js'
 import Eleven from './components/eleven/eleven.js'
+=======
+import addUsers from './components/Third/addUser/addUsers.js';
+import Nine from './components/nine/Nine.js';
+import Ten from './components/childComponent/first/child.js';
+import twelve from './components/twelve/twelve.js'
+>>>>>>> b6f0ca3c48a6bcb518a6afdd610fa4e272a05a47
 
 
 //redux来控制的；
@@ -58,7 +65,11 @@ render((
                 <Route path="/addusers" component={addUsers} />
                 <Route path="/nine" component={Nine} />
                 <Route path="/ten" component={Ten} />
+<<<<<<< HEAD
                 <Route path="/eleven" component={Eleven} />
+=======
+                <Route path="/twelve" component={twelve} />
+>>>>>>> b6f0ca3c48a6bcb518a6afdd610fa4e272a05a47
             </Route>
         </Router>
     </Provider>
