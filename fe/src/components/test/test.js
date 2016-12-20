@@ -32,6 +32,7 @@ export default class Test extends Component {
         )
     }
 }
+
 Test.defaultProps = {
     name: 'hello!!'
 }

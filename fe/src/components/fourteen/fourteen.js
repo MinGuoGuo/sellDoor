@@ -19,7 +19,7 @@ export default class Fourteen extends Component {
         return (
             <div>
                 <input ref="input"  onChange={this.handleChange.bind(this)} />
-                {/*请注意当onChange={() => this.handleChange()} 这种写法时e.target */}
+                {/*请注意当onChange={() => this.handleChange()} 这种写法时e.target.value不能取到值 */}
                 <div>
                     <Child num={this.state.value} />
                 </div>
